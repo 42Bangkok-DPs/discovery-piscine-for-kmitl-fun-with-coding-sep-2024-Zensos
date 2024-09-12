@@ -5,16 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="backgroound.css" />
     <title>Document</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
   </head>
   <body id="body">
-    <button id="btn" onclick="onClick()">Click me</button>
+    <button id="btn">Click me</button>
   </body>
   <script>
-    const onClick = () => {
-      const body = document.getElementById("body");
-      const colors = ["#FF6347", "#40E0D0", "#FFD700", "#90EE90", "#1E90FF"];
-      const randomColor = colors[Math.floor(Math.random() * colors.length)];
-      body.style.backgroundColor = randomColor;
-    };
+    $(document).ready(function () {
+      $("#btn").click(function () {
+        const colors = ["#FF6347", "#40E0D0", "#FFD700", "#90EE90", "#1E90FF"];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        $("#body").css("background-color", randomColor);
+      });
+    });
   </script>
 </html>

@@ -1,31 +1,33 @@
 let list = [];
-const toDoEl = document.getElementById("ft_list");
-const addBtn = document.getElementById("addBtn");
+const toDoEl = $("#ft_list");
+const addBtn = $("#addBtn");
 
 const render = () => {
-  toDoEl.innerHTML = "";
+  toDoEl.empty();
   if (!list.length) {
-    const empty_list = document.createElement("div");
-    empty_list.innerHTML = "No ToDos";
-    empty_list.style = "color: white;font-size: 20px;text-align: center;";
-    empty_list.classList.add("emptyMessage");
-    toDoEl.appendChild(empty_list);
+    const empty_list = $("<div></div>")
+      .text("No ToDos")
+      .css({
+        color: "white",
+        "font-size": "20px",
+        "text-align": "center",
+      })
+      .addClass("emptyMessage");
+    toDoEl.append(empty_list);
     return;
   }
 
   list.forEach((value, index) => {
     const toDoItem = createTodoElement(value);
-    toDoItem.addEventListener("click", () => {
+    toDoItem.on("click", () => {
       removeTodo(index);
     });
-    toDoEl.appendChild(toDoItem);
+    toDoEl.append(toDoItem);
   });
 };
 
 const createTodoElement = (value) => {
-  const button = document.createElement("button");
-  button.classList.add("todoItem");
-  button.textContent = value;
+  const button = $("<button></button>").addClass("todoItem").text(value);
   return button;
 };
 
@@ -64,7 +66,7 @@ const getCookie = (key) => {
   return null;
 };
 
-addBtn.addEventListener("click", () => {
+addBtn.on("click", () => {
   const newTodo = prompt("New ToDo");
   if (newTodo && newTodo.trim().length > 0) {
     addTodo(newTodo);
@@ -76,4 +78,6 @@ if (oldToDo) {
   list = JSON.parse(oldToDo);
 }
 
-render();
+$(document).ready(() => {
+  render();
+});
